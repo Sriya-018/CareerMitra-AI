@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copy knowledge base (needed by ingest.py)
+COPY knowledge_base/ /knowledge_base/
+
+# Copy RAG service files
+COPY rag_service/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY rag_service/ .
+
+# Build the FAISS index at image build time
+RUN python ingest.py
+
+EXPOSE 5001
+
+CMD ["python", "app.py"]

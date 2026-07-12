@@ -48,18 +48,15 @@ services:
       - key: ADMIN_SECRET_KEY
         sync: false
 
-  # ── 2. Python RAG Microservice ──────────────────────────────────
+  # ── 2. Python RAG Microservice (Docker — pins Python 3.11) ──────
   - type: web
     name: careermitra-rag
-    runtime: python
-    pythonVersion: "3.11.10"
-    rootDir: rag_service
-    buildCommand: pip install --only-binary=:all: --upgrade pip && pip install --only-binary=:all: -r requirements.txt && python ingest.py
-    startCommand: python app.py
+    runtime: docker
+    dockerfilePath: ./Dockerfile.rag
     plan: free
     envVars:
       - key: RAG_PORT
-        value: 10000
+        value: 5001
       - key: EMBED_MODEL
         value: sentence-transformers/all-MiniLM-L6-v2
       - key: RAG_TOP_K
