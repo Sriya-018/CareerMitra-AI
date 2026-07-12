@@ -5,7 +5,7 @@ langchain-community==0.3.17
 # Note: use langchain-community's HuggingFaceEmbeddings to avoid the
 # langchain-huggingface -> transformers -> tensorflow import chain on some systems.
 # langchain-huggingface==0.1.2  (optional: works if tensorflow is compatible)
-faiss-cpu==1.10.0
+faiss-cpu==1.14.2
 sentence-transformers==3.4.1
 pypdf==5.3.1
 pydantic==2.10.6
