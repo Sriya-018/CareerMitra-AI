@@ -2,11 +2,11 @@ fastapi==0.115.6
 uvicorn[standard]==0.34.0
 langchain==0.3.18
 langchain-community==0.3.17
-# Note: use langchain-community's HuggingFaceEmbeddings to avoid the
-# langchain-huggingface -> transformers -> tensorflow import chain on some systems.
-# langchain-huggingface==0.1.2  (optional: works if tensorflow is compatible)
-faiss-cpu==1.14.2
+# pin pydantic-core explicitly so pip picks the manylinux wheel
+# and never attempts a Rust/maturin compile from source
+pydantic-core==2.23.4
+pydantic==2.9.2
+faiss-cpu==1.13.2
 sentence-transformers==3.4.1
 pypdf==5.3.1
-pydantic==2.9.2
 python-dotenv==1.0.1

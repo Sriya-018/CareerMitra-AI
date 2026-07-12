@@ -54,7 +54,7 @@ services:
     runtime: python
     pythonVersion: "3.11.10"
     rootDir: rag_service
-    buildCommand: pip install -r requirements.txt && python ingest.py
+    buildCommand: pip install --only-binary=:all: --upgrade pip && pip install --only-binary=:all: -r requirements.txt && python ingest.py
     startCommand: python app.py
     plan: free
     envVars:
