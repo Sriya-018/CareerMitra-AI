@@ -1,0 +1,67 @@
+# render.yaml — CareerMitra AI deployment on Render
+# Deploy all 3 services from one repo.
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+
+  # ── 1. Express Backend ──────────────────────────────────────────
+  - type: web
+    name: careermitra-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # ── IBM watsonx.ai ────────────────────────────────────────
+      - key: IBM_API_KEY
+        sync: false          # fill in Render dashboard
+      - key: IBM_PROJECT_ID
+        sync: false
+      - key: WATSONX_URL
+        value: https://us-south.ml.cloud.ibm.com
+      - key: WATSONX_MODEL_ID
+        value: ibm/granite-13b-instruct-v2
+      # ── Watson STT ─────────────────────────────────────────────
+      - key: WATSON_STT_API_KEY
+        sync: false
+      - key: WATSON_STT_URL
+        sync: false
+      # ── Watson TTS ─────────────────────────────────────────────
+      - key: WATSON_TTS_API_KEY
+        sync: false
+      - key: WATSON_TTS_URL
+        sync: false
+      # ── Watson Language Translator ─────────────────────────────
+      - key: WATSON_LT_API_KEY
+        sync: false
+      - key: WATSON_LT_URL
+        sync: false
+      # ── RAG sidecar URL (set after RAG service is deployed) ────
+      - key: RAG_SERVICE_URL
+        value: https://careermitra-rag.onrender.com   # update after first deploy
+      # ── Admin ──────────────────────────────────────────────────
+      - key: ADMIN_SECRET_KEY
+        sync: false
+
+  # ── 2. Python RAG Microservice ──────────────────────────────────
+  - type: web
+    name: careermitra-rag
+    runtime: python
+    rootDir: rag_service
+    buildCommand: pip install -r requirements.txt && python ingest.py
+    startCommand: python app.py
+    plan: free
+    envVars:
+      - key: RAG_PORT
+        value: 10000
+      - key: EMBED_MODEL
+        value: sentence-transformers/all-MiniLM-L6-v2
+      - key: RAG_TOP_K
+        value: 5
+      - key: RAG_SCORE_THRESH
+        value: "0.30"
