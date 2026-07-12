@@ -16,6 +16,32 @@
 
 ---
 
+## Screenshots
+
+<div align="center">
+
+### 🏠 Home
+![Home](docs/screenshots/home.png)
+
+### 📋 Assessment
+![Assessment](docs/screenshots/assessment.png)
+
+### 🎯 Results
+![Results](docs/screenshots/results.png)
+
+### 📄 Resume Generator
+![Resume](docs/screenshots/resume.png)
+
+### 💼 Interview Preparation
+![Interview Prep](docs/screenshots/interview.png)
+
+### 📊 Admin Dashboard
+![Admin](docs/screenshots/about.png)
+
+</div>
+
+---
+
 ## What is CareerMitra AI?
 
 CareerMitra AI bridges the **career information gap** for rural youth in India who lack access to quality counselling. In 3 minutes, a student from any village can fill out a profile and receive:
